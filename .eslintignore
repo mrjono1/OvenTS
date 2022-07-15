@@ -1,0 +1,6 @@
+dist
+coverage
+.github
+node_modules
+*.js
+interfaces
