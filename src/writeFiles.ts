@@ -5,16 +5,18 @@ import { GeneratedFile } from "templates/interfaces/GeneratedFile";
 
 export async function writeFiles(application: Application, files: GeneratedFile[]): Promise<void> {
 
-
-  try {
-    await access(application.outputDirectory);
-  } catch {
-    console.log(`Creating ${application.outputDirectory}`);
-    await mkdir(application.outputDirectory);
-  }
-
   for await (const file of files) {
-    const filePath = path.join(application.outputDirectory, file.filePath, file.fileName);
+
+    const fileDirectory = path.join(application.outputDirectory, ...file.filePath);
+
+    // Create output direcory
+    try {
+      await access(fileDirectory);
+    } catch {
+      console.log(`Creating ${fileDirectory}`);
+      await mkdir(fileDirectory);
+    }
+    const filePath = path.join(fileDirectory, file.fileName);
 
     // TODO: format files
 

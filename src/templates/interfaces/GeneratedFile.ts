@@ -1,6 +1,6 @@
 export interface GeneratedFile {
   fileName: string;
-  filePath: string;
+  filePath: string[];
   fileContent: string;
   formatted?: boolean;
 }
